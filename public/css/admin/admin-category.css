@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+
+body {
+    background: radial-gradient(#6c0790, #42025f, #000000) no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 0px;
+    width: 100%;
+    font-size: 0rem;
+}
+/* ----------nav-bar--------- */
+
+
+nav {
+    display: flex !important;
+    align-items: center !important;
+}
+
+nav h2 {
+    font-family: 'Odibee Sans', cursive;
+    color: #fff;
+}
+.nav-link {
+    color: #fff !important;
+    font-size: x-large !important;
+    font-family: 'Zen Dots', cursive !important;
+}
+.head{
+align-items: center;
+font-family: 'Zen Dots', cursive;
+}
+.body-3{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+
+}
+/* ----------admin detail--------- */
+.container{
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* height: 100vh; */
+}
+.form-container{
+    justify-content: center;
+    height: inherit;
+}
+form{
+
+    /* border: 1px solid #fff;
+    border-radius: 10px;
+    align-items: center;
+    width: inherit; */
+
+}
+
+/* .form-container input { */
+    /* justify-content: center; */
+    /* padding: 5px 0px 5px !important;
+    width: 100%;
+    margin: 5px 0 !important;
+    border: 3px solid #fff !important;
+    border-radius: 10px;
+    box-sizing: border-box;
+    cursor: pointer !important;
+
+}
+.box {
+    justify-content: center;
+    width: fit-content;
+ }
+ .btn-sub {
+    background-color: transparent;
+    padding: 10px 6rem;
+    border-radius: 10px;
+    text-align: center;
+    border: 3px solid #fff !important;
+}
+
+.btn-sub:hover {
+    background-color: blue !important;
+    border: 3px solid blue !important;
+} */

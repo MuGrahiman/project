@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css -->
+    <link rel="stylesheet" href="../../public/css/admin/admin-single.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+                       <!-- font link -->
+    <!-- zen dots -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <!-- odibee -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
+    <title>PlayTform | <%= title %></title>
+
+</head>
+
+<body>   
+  <%- include('partials/navadmin') %>
+
+     <!-- <header>
+        <nav class="navbar navbar-expand-lg px-5 align-text-center"> 
+            <div class="container-fluid flex-lg-column">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                <img  src="/public/img/log.png"  alt="Logo" width="40" height="40" class="d-inline-block align-text-top ">
+                <h2 class="text-white ms-4 my-0"><b>PlayTform</b></h2>
+              </a>
+              
+              <button class="navbar-toggler navbar-light bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              
+              <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto">
+                  <a class="nav-link active" aria-current="page"href="/">DASHBOARD</a>
+                  <a class="nav-link" href="#">PRODUCT</a>
+                  <a class="nav-link" href="#">COSTAMER</a>
+                  <a class="nav-link" href="#">COUPEN</a>
+                  <a class="nav-link" href="#">CATEGORY</a>
+                  <a class="nav-link" href="#">LOG-OUT</a>
+
+
+                 
+                </div>
+              </div>
+            </div>
+          </nav>
+    
+    </header> -->
+
+      <!-- --------------------------------products------------------ -->
+
+
+      <div class="container mt-5">
+        <div class="row bg-dark ">
+          <div class="col-md bar p-3">
+            <img src="<%=product.img.url%>" 
+
+            class="card-img-top" alt="...">
+          </div>
+          <div class="col-md text-white text-start card bg-transparent bar p-3 border-0 p">
+            <div class="card-header bg-transparent p-0 border-0 my-3">
+              <p class="display-3 ">Title:<%= product.title%>
+              </p>
+
+            </div>
+            <div class="card-body p-0 ">
+              <p class="display-6">developer:<%= product.developer%>
+              </p>
+              <p class="display-6"> release date:<%=
+                  product.createdAt.getDate()+"."+product.createdAt.getMonth()+1+"."+product.createdAt.getFullYear() %>
+              </p>
+              <!-- <p class="display-6"> release date:<%= product.createdAt+"".split()%></p>   -->
+              <!-- <script>let cat = product.createdAt.split('0,9')</script> -->
+              <!-- <p class="display-6"> release date: <script>let cat = product.createdAt.split('0,9')</script></p> -->
+
+              <p class="display-6"> playable on:<%= product.category %>
+              </p>
+              <p class="display-6"> genres:<%= product.genres %>
+              </p>
+              <!-- < <a href="<%=product%>;" download="project" target="_blank">
+                <i class="bi bi-box-arrow-down"></i> -->
+                </a>
+
+            </div>
+            <div class=" d-flex gap-2 justify-content-between">
+
+              <a class="col-5 btn btn-lg btn-outline-primary" href="/admin-product-edit/<%=product._id%>">Edit</a>
+              <!-- <a class="col-5 btn btn-lg  " style="display: block;" id="wishlist">add to wishlist</a> -->
+              <!-- <a class="col-5 btn btn-lg btn-success " style="display: none;" id="wishlisted">added to wishlist</a> -->
+
+              <!-- <a class="col-1 btn btn-lg btn-secondary d-flex justify-content-center  "><i
+                  class="bi bi-cart m-auto"></i></a> -->
+            </div>
+          </div>
+
+        </div>
+        <div class="row bg-dark ">
+          <div class="d-flex products gap-3 my-3 bg-dark">
+          <% for (let i=0; i < product.imgs.length; i++) { %>
+         <div class="col-6 box-shadow  rounded my-5">
+              <img src="<%= product.imgs[i].url %>" class="img-fluid rounded" alt="">
+         </div>
+         <% } %>
+        </div>
+        </div>
+        <div class="row p bg-dark about">
+          <div class="col-md text-white fs-1 p-3">
+          <h1>About this game</h1>
+          <p class="display-6"> Uploaded date:<%=
+            product.createdAt.getDate()+"."+product.createdAt.getMonth()+1+"."+product.createdAt.getFullYear() %>
+        </p>
+            <%=product.about%></div>
+          <div class="col-md m-0 p-3 ">
+            <div class="card ">
+              <div class="card-header">
+                <h1>Costamers</h1>
+              </div>
+              <div class="card-body border border-solid bg-secondary products shadow d-flex flex-column gap-2 ">
+                <%others.forEach(others=>{ %>
+
+                  <div class="d-flex align-items-center bg-white ">
+                    <div class="product p-2 shadow">
+                      <img src="<%=others.img.url%>" alt="">
+                    </div>
+                    <div class="ms-md-5">
+                      <h2>
+                        <%= others.title%>
+                      </h2>
+                    </div>
+                  </div>
+                  <%})%>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    <!-- ------------footer--------------- -->
+    <footer>
+      <!-- <div class="container-fluid  text-white"> -->
+    
+        <!-- <div class=""> -->
+          <div class="container bg-dark text-white p">
+            
+            <!-- <div class="row "> -->
+              <div class="row ">
+                <hr>
+                <div class=" d-md-flex justify-content-between text-center">
+                  <div class="col ">
+                  <h2 class=""><b>PlayTform</b></h2>
+
+                  </div>
+                  <div class="col">
+                  <h4 class=" fw-normal">Platform For True Gamers . Play Unlimited Games</h4>
+
+                  </div>
+                </div>
+
+              </div>
+              
+            <!-- </div> -->
+            <hr>
+            <div class="row  text-center">
+              <p class="m fw-light">copyright &copy; PLAYTFORM PVT LTD</p>
+            </div>
+          </div>
+        <!-- </div> -->
+      <!-- </div> -->
+
+
+    </footer>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+
+body {
+    background: radial-gradient(#6c0790, #42025f, #000000) no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 0px;
+    width: 100%;
+    font-size: 0rem;
+}
+/* ----------nav-bar--------- */
+.box-shadow {
+    box-shadow:15px 15px 10px rgb(6 6 6);
+}
+.hd {
+    font-family: 'Zen Dots', cursive !important;
+
+}
+.p{
+    font-family: 'Odibee Sans', cursive;
+
+}
+.overflow{
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type:mandatory;
+}
+.hidden {
+    display: none;
+  }
+
+nav {
+    display: flex !important;
+    align-items: center !important;
+}
+
+nav h2 {
+    font-family: 'Odibee Sans', cursive;
+    color: #fff;
+}
+.nav-link {
+    color: #fff !important;
+    font-size: x-large !important;
+    font-family: 'Zen Dots', cursive !important;
+}
+.head{
+align-items: center;
+font-family: 'Zen Dots', cursive;
+}
+
+.bar{
+    height: 30rem;
+    position: relative;
+
+    /* padding: auto; */
+}
+.bar img{
+
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border: 1px outset black;
+    border-radius: 30px;
+    box-shadow:15px 15px 10px rgb(6 6 6);
+
+}
+.products{
+   max-height:30rem !important;
+    width: inherit;
+    overflow-y: hidden;
+
+}
+
+.product img{
+  height: 6rem; 
+  width: 5rem; 
+border-radius: 10px;
+}
+

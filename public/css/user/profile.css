@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+
+body {
+    background: radial-gradient(#6c0790, #42025f, #000000) no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 0px;
+    font-size: 0rem;
+}
+
+nav {
+    display: flex !important;
+    align-items: center !important;
+}
+
+nav h2 {
+    font-family: 'Odibee Sans', cursive;
+    color: #fff;
+}
+
+#nav-icon {
+    background: rgb(255, 255, 255);
+    /* background-color : black !important; */
+}
+
+#icon {
+    background-color: rgb(236, 236, 236);
+
+}
+
+.nav-link {
+    color: #fff !important;
+    font-size: x-large !important;
+    font-family: 'Zen Dots', cursive !important;
+}
+
+
+.home-btn {
+    color: #fff !important;
+    font-size: x-large !important;
+    font-family: 'Zen Dots', cursive !important;
+    background-color: transparent;
+    border: 5px solid rgb(255, 255, 255);
+    border-radius: 1em;
+}
+
+.home-btn:hover {
+    color: blue !important;
+    cursor: pointer;
+    border: 5px solid rgb(17, 36, 238);
+    border-radius: 1em;
+}
+
+.form-container {
+    height: 100vh;
+    /* justify-content: center;
+    align-items: center; */
+    /* width: 35rem; */
+    /* font-size: large; */
+}

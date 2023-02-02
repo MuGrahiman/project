@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+
+body {
+    background: radial-gradient(#6c0790, #42025f, #000000) fixed no-repeat;
+    background-size: cover;
+    /* height: auto; */
+    box-sizing: border-box;
+    margin: 0px;
+    width: 100%;
+    font-size: 0rem;
+    font-family: 'Odibee Sans', cursive !important;
+
+}
+.box-shadow {
+    box-shadow:15px 15px 10px rgb(6 6 6);
+}
+.hd {
+    font-family: 'Zen Dots', cursive !important;
+
+}
+.p{
+    font-family: 'Odibee Sans', cursive;
+
+}
+
+nav {
+    display: flex !important;
+    align-items: center !important;
+    /* background: linear-gradient(to bottom, rgb(72, 9, 101), rgb(13, 13, 14))    */
+}
+
+nav h2 {
+    font-family: 'Odibee Sans', cursive;
+    color: #fff;
+}
+
+#nav-icon {
+    background: rgb(255, 255, 255);
+    /* background-color : black !important; */
+}
+
+#icon {
+    background-color: rgb(236, 236, 236);
+
+}
+
+.nav-link {
+    color: #fff !important;
+    font-size: x-large !important;
+    font-family: 'Zen Dots', cursive !important;
+}
+
+.home {
+    background-image: 
+    /* linear-gradient(to bottom, rgb(4, 4, 4), rgba(72, 9, 101, 0.201), rgb(2, 2, 2)), */
+     /* linear-gradient(#6c0790, #42025f, #000000),  */
+     radial-gradient(#0000002e, #000000c5, #040404),
+    url(/public/img/home-img.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow:0px 50px 50px rgb(6 6 6);
+
+    /* opacity: .25; */
+    color: #fff;
+
+    /* font-size: x-large ; */
+    font-family: 'Zen Dots', cursive;
+}
+
+.home-btn {
+    color: #fff !important;
+    font-size: x-large !important;
+    font-family: 'Zen Dots', cursive !important;
+    background-color: transparent;
+    border: 5px solid rgb(255, 255, 255);
+    border-radius: 1em;
+}
+
+.home-btn:hover {
+    color: blue !important;
+    cursor: pointer;
+    border: 5px solid rgb(17, 36, 238);
+    border-radius: 1em;
+}
+
+
+.card{
+    height: 25rem !important;
+    object-fit: fill;
+
+}
+.card img{
+    height: inherit !important;
+    object-fit: fill !important;
+}
+
+.cate-first {
+    /* box-shadow:10px 50px 50px rgb(6 6 6); */
+    background-image: url(/public/img/pinpng.com-gaming-characters-png-1980579.png);
+    background-size: cover;
+text-align: end;
+}
+.cate-second {
+    /* box-shadow:0px 50px 50px rgb(6 6 6); */
+    background-image: url(/public/img/spider.png);
+
+}
+.cate-third{
+    /* box-shadow:0px 50px 50px rgb(6 6 6); */
+    background-image: url(/public/img/pinpng.com-iron-man-suit-png-3612486.png);
+
+}
