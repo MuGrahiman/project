@@ -119,8 +119,12 @@
           <p class="display-6"> Uploaded date:<%=
             product.createdAt.getDate()+"."+product.createdAt.getMonth()+1+"."+product.createdAt.getFullYear() %>
         </p>
-            <%=product.about%></div>
-          <div class="col-md m-0 p-3 ">
+        <p class="display-6"> Product version :<%=
+   product.version %>
+      </p>
+            <%=product.about%>
+          </div>
+          <!-- <div class="col-md m-0 p-3 ">
             <div class="card ">
               <div class="card-header">
                 <h1>Costamers</h1>
@@ -144,7 +148,7 @@
               </div>
 
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 

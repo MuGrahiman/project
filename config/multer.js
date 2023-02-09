@@ -7,15 +7,15 @@ const sharp = require('sharp')
 
 const storage = multer.diskStorage({
     destination:(req,file,cb)=>{
-      // console.log('in the multer')
-      // console.log(file)
-      if (file.fieldname == 'instalfile') {
+      console.log('in the multer')
+      console.log(file)
+      if (file.fieldname == 'file') {
         cb(null, path.join(__dirname,'../public/upload/files'));
 
-      } else if (file.fieldname == 'Images') {
+      } else if (file.fieldname == 'imgs') {
         cb(null, path.join(__dirname,'../public/upload/Images'));
 
-      } else if (file.fieldname == 'Image') {
+      } else if (file.fieldname == 'img') {
         cb(null, path.join(__dirname,'../public/upload/Image'));
 
       }
@@ -39,7 +39,9 @@ const multerFilter = async(req, file, cb) => {
     // .then(res => cb(null, res))
     cb(null,filter)
 }
-const upload=multer({storage,fileFilter:multerFilter})
+const upload=multer({storage,
+  fileFilter:multerFilter
+})
 
 
 // 
@@ -51,5 +53,5 @@ const upload=multer({storage,fileFilter:multerFilter})
       },
     });
     // const upload = multer({ storage: cloudstorage});
-
+console.log(upload)
   module.exports=upload

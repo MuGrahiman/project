@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css -->
+    <link rel="stylesheet" href="../../public/css/admin/admin-coupen.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+                       <!-- font link -->
+    <!-- zen dots -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <!-- odibee -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
+    <title>Document</title>
+
+</head>
+
+<body>   
+  <%- include('partials/navadmin') %>
+
+
+
+  <div class="container bg-light px-4">
+    <div class="row">
+      <div class="col-md">
+    <h1 class="mt-4 text-dark">Dashboard</h1>
+
+      </div>
+      <div class="col-md d-flex justify-content-end align-items-center">
+<a href="/admin-out" class="btn btn-lg btn-outline-secondary ">Log-Out</a>
+      </div>
+</div>
+    <ol class="breadcrumb mb-4">
+        <!-- <li class="breadcrumb-item text-light active">Dashboard</li> -->
+    </ol>
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body" style="height:100px;"><h3>Products</h3></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <h5><%= product.length%> </h5>
+                    <div class="small text-white"></div>
+                </div>
+            </div>
+        </div>
+      
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body" style="height:100px;"><h3>Customers</h3></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <h5><%= user.length%> </h5>
+                    <div class="small text-white"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body" style="height:100px;"><h3>Total Purchases</h3></div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <h5><%= order.length%> </h5>
+                    <div class="small text-white"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card bg-warning text-white mb-4">
+                <div class="card-body" style="height:100px;"><h3>Revenue</h3></div>
+              <div class="card-footer d-flex align-items-center justify-content-between">
+                  <h5><%= order[0].amount %>  </h5>
+                  <div class="small text-white"></div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- <div class="pb-2">
+        <form action="/admin/sales" class="d-flex justify-content-between" method="post">
+            <label for="exampleFormControlInput1">Starting Date</label>
+            <input type="date" class="form-control " style="width: 20%;" id="exampleFormControlInput1" placeholder="Name" name="from">
+            <label for="exampleFormControlInput1" style="padding-left: 1%;">Ending Date</label>
+            <input type="date" class="form-control " style="width: 20%; " id="exampleFormControlInput1" placeholder="Name" name="to">
+            <div style="padding-left: 1%;">
+        </div>
+    <button type="submit" class="btn btn-primary" >Submit</button>
+    </form>
+    </div> -->
+    <div class="row">
+        <!-- <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Area Chart Example
+                </div>
+                <div class="card-body"><canvas id="myAreaChart" width="100%" height="50"></canvas></div>
+            </div>
+        </div> -->
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Bar Chart
+                </div>
+                <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1"></i>
+                    Pie Chart 
+                </div>
+                <div class="card-body"><canvas id="myPieChart" width="100%" height="50"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer>
+  <!-- <div class="container-fluid  text-white"> -->
+
+    <!-- <div class=""> -->
+      <div class="container bg-secondary text-white p">
+        
+        <!-- <div class="row "> -->
+          <div class="row ">
+            <hr>
+            <div class=" d-md-flex justify-content-between text-center">
+              <div class="col ">
+              <h2 class=""><b>PlayTform</b></h2>
+
+              </div>
+              <div class="col">
+              <h4 class=" fw-normal">Platform For True Gamers . Play Unlimited Games</h4>
+
+              </div>
+            </div>
+
+          </div>
+          
+        <!-- </div> -->
+        <hr>
+        <div class="row  text-center">
+          <p class="m fw-light">copyright &copy; PLAYTFORM PVT LTD</p>
+        </div>
+      </div>
+    <!-- </div> -->
+  <!-- </div> -->
+
+
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+   
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+  crossorigin="anonymous"></script>
+  <script>
+    const cty = document.getElementById('myPieChart');
+  
+  new Chart(cty, {
+    type: 'pie',
+    data: {
+      labels: ["Products","Customers","Total Purchases","Revenue"],
+      datasets: [{
+        label: 'Revenue',
+        backgroundColor: ['#007bff', '#E4E40F','#16A9A5' , '#4FFF33' , '#F10707',],
+        data: ["<%= product.length%> ", "<%= user.length%>", "<%= order.length%> ",  "<%= order[0].amount %>" ],
+
+      //  borderWidth: 1
+      }]
+    }
+  });
+</script>
+<script>
+// if ( window.history.replaceState ) {
+//     window.history.replaceState( null, null, window.location.href );
+// }
+
+
+// Set new default font family and font color to mimic Bootstrap's default styling
+Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#292b2c';
+
+// Bar Chart Example
+var ctx = document.getElementById("myBarChart");
+var myLineChart = new Chart(ctx, {
+type: 'bar',
+data: {
+labels: ["Products","Customers","Total Purchases","Revenue"],
+// labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+datasets: [{
+  label: "Revenue",
+  backgroundColor: "rgba(2,117,216,1)",
+  borderColor: "rgba(2,117,216,1)",
+  data: ["<%= product.length%> ", "<%= user.length%>", "<%= order.length%> ",  "<%= order[0].amount %>" ],
+}],
+},
+options: {
+scales: {
+  xAxes: [{
+    time: {
+      unit: 'month'
+    },
+    gridLines: {
+      display: false
+    },
+    ticks: {
+      maxTicksLimit: 12
+    }
+  }],
+  yAxes: [{
+    ticks: {
+      min: 0,
+      max: 100000,
+      maxTicksLimit: 8
+    },
+    gridLines: {
+      display: true
+    }
+  }],
+},
+legend: {
+  display: false
+}
+}
+});
+
+</script>
+
+</body>
+
+</html>

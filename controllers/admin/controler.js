@@ -16,6 +16,7 @@ require("dotenv").config(), require("../../config/connection");
 
 const Path = require("path");
 const sharp = require("sharp");
+const Order = require("../../models/orderschema");
 let adminno = 226688;
 
 const home = (req, res) => {
@@ -32,6 +33,49 @@ const login_admin = (req, res) => {
       error: "password not matching",
     });
   }
+};
+const dashboard = async (req, res) => {
+
+  let product = await Product.find();
+  let user = await Project.find();
+   await Order.find()
+
+let order = await
+Order.aggregate([
+  {
+      $group: {
+          "_id" : '_id',
+          amount: {
+             $sum: "$finalAmount" 
+          } 
+      }
+  }
+])
+
+  res.render("admin/dashboard", {
+    title: "admin-dashboard",
+    product,order,user
+  });
+  
+};
+const purchase = (req, res) => {
+  console.log("in the purchase code");
+  
+
+  Order.find()
+    .populate("user")
+    .populate("product")
+    .populate("coupen")
+
+    // .exec()
+    .then((result) => {
+      console.log(result);
+      res.render("admin/purchase", {
+        title: "admin-purchase",
+        product: result,
+      });
+    });
+
 };
 const customer = (req, res) => {
   Project.find()
@@ -73,7 +117,7 @@ const product = (req, res) => {
   Product.find()
     .sort({ createdAt: -1 })
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       console.log("get all Product from db");
       res.render("admin/admin-product", {
         title: "admin-Product",
@@ -111,7 +155,7 @@ const Editadmin_product = async (req, res) => {
 const product_add = async (req, res) => {
   const category = await Category.find();
   const product = await Product.find();
-
+  console.log(category);
   res.render("admin/admin-product-add", {
     title: "admin-product-add",
     category,
@@ -153,15 +197,14 @@ const product_post = async (req, res) => {
 
     req.files.forEach((file) => {
       //  console.log(file.fieldname)
-      if (file.fieldname == "instalfile") {
+      if (file.fieldname == "file") {
         instalfile = file;
-      } else if (file.fieldname == "Image") {
+      } else if (file.fieldname == "img") {
         Image = file;
-      } else if (file.fieldname == "Images") {
+      } else if (file.fieldname == "imgs") {
         Images.push(file);
       }
     });
-
 
     const data = {
       image: Image.path,
@@ -169,23 +212,27 @@ const product_post = async (req, res) => {
 
     let war = await Cloudinary.uploader.upload(Image.path, {
       public_id: Image.filename,
+      // transformation: [
+      //   { width: 485, height: 485, crop: "fill" },
+      // ]
     });
 
     for (i = 0; i < Images.length; i++) {
-    
       const datas = {
         image: Images[i].path,
       };
       let mar = await Cloudinary.uploader.upload(Images[i].path, {
-        public_id: Images[i].filename,
+        // public_id: Images[i].filename,  transformation: [
+        //   { width: 485, height: 485, crop: "fill" },
+        // ]
       });
 
       imgs.push({ public_id: mar.public_id, url: mar.url });
     }
-console.log(req.files)
+    console.log(req.files);
     newproduct = new Product({
       file: req.files[2].filename,
-      title: req.body.title,
+      title: req.body.title.toUpperCase(),
       developer: req.body.developer,
       release_date: req.body.release,
       category: req.body.category,
@@ -193,10 +240,11 @@ console.log(req.files)
       genres: req.body.genres,
       cost: req.body.cost,
       about: req.body.about,
+      delete:false,
       imgs: imgs,
       img: { public_id: war.public_id, url: war.url },
     });
-    
+
     let finder = await Product.findOne({ title: req.body.title });
     if (finder) {
       Category.find()
@@ -210,7 +258,7 @@ console.log(req.files)
         });
     } else {
       console.log("new product added");
-      await newproduct.save().then((res)=>console.log(res));
+      await newproduct.save().then((res) => console.log(res));
       res.redirect("/admin-product-add");
     }
   } catch (err) {
@@ -228,39 +276,96 @@ console.log(req.files)
 };
 
 const update_product = async (req, res) => {
+  console.log('iam reached')
   try {
-    let category;
-    let id = req.params.id;
-
-    console.log(id);
-    Product.findByIdAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          title: req.body.name,
-          developer: req.body.developer,
-          // release_date:Date.now(),
-          category: req.body.category,
-          genres: req.body.genres,
-          cost: req.body.cost,
-        },
-      },
-      console.log(req.body)
-    ).then((result) => {
-      console.log(result);
-      console.log("get all singleadmin_postproduct");
-      // console.log(others+"other product");
-      // res.render("admin/admin-single-product", {
-      //   title: "user-Product",
-      //   product: result,
-      // category,
-      // others
-      // });
-      res.redirect("/admin-product");
+    const imgs = [];
+    let img;
+    let instalfile;
+    let Image;
+    let Images = [];
+    let product = await Product.find({_id:req.params.id})
+// console.log(product+"in the update product code")
+    req.files.forEach((file) => {
+      //  console.log(file.fieldname)
+      if (file.fieldname == "file") {
+        instalfile = file;
+      } else if (file.fieldname == "img") {
+        Image = file;
+      } else if (file.fieldname == "imgs") {
+        Images.push(file);
+      }
     });
-  } catch (error) {
-    console.log(error);
+    console.log(instalfile+"="+Image+"="+Images)
+    if (instalfile) {
+      req.body.file = req.files[2].filename
+    }
+   if (Image) {
+    
+    // console.log(product[0].img.public_id)
+      let war = await Cloudinary.uploader.upload( Image.path,
+        {
+          public_id:Image.filename,
+          overwrite: true,
+          invalidate: true,
+         
+        },
+      );
+      img = {
+        public_id: war.public_id,
+        url: war.url
+      }
+
+      req.body.img = img
+console.log(war)
+
+   }
+if (Images) {
+  for (i = 0; i < Images.length; i++) {
+    const datas = {
+      image: Images[i].path,
+    };
+    let mar = await Cloudinary.uploader.upload(Images[i].path, {
+      public_id: Images[i].filename,
+      overwrite: true,
+      invalidate: true,
+     
+    });
+
+    imgs.push({ public_id: mar.public_id, url: mar.url });
   }
+  req.body.imgs = imgs
+}
+console.log(req.body)
+ 
+    
+await Product.findByIdAndUpdate(req.params.id, req.body)
+.then((result)=>{
+  Product.find()
+  .sort({ createdAt: -1 })
+  .then((result) => {
+    res.render("admin/admin-product", {
+      title: "admin-product",
+      product: result,
+     
+    });
+  });
+})
+
+  } catch (err) {
+    Product.find()
+      .sort({ createdAt: -1 })
+      .then((result) => {
+        res.render("admin/admin-product", {
+          title: "admin-product",
+          category: result,
+          err,
+        });
+      });
+    console.log(err);
+  }
+
+
+
 };
 const product_block = (req, res) => {
   let id = req.params.id;
@@ -393,7 +498,7 @@ const category = (req, res) => {
 
 const add_category = async (req, res) => {
   const newcategory = new Category({
-    title: req.body.name,
+    title: req.body.name.toUpperCase(),
     delete: false,
   });
   await newcategory
@@ -409,7 +514,7 @@ const category_update = (req, res) => {
 
   Category.findByIdAndUpdate(
     { _id: req.params.id },
-    { $set: { title: req.body.title } }
+    { $set: { title: req.body.title.toUpperCase() } }
   )
     .then((result) => {
       res.redirect("/category");
@@ -448,6 +553,8 @@ const category_unblock = (req, res) => {
 module.exports = {
   home,
   customer,
+  dashboard,
+  purchase,
   customer_block,
   customer_unblock,
   login_admin,

@@ -31,7 +31,6 @@
 </head>
 
 <body>
-  <%- include('partials/navadmin') %>
 
     <!-- <header>
         <nav class="navbar navbar-expand-lg px-5 align-text-center">
@@ -74,20 +73,20 @@
 
             <div id="forImage">
                 <label for="Image" class="form-label">Upload Your Icon</b></label><br>
-                <input type="file" id="Image" class="form-control" name="Image" value="" required>
+                <input type="file" id="Image" class="form-control" name="img" value="" required>
                 <small class="fw-lighter text-danger text-center fst-italic" id="imgspan"></small>
 
             </div>
             <div id="forImages">
                 <label for="Images" class="form-label">Upload Your Sub-Images</b></label><br>
-                <input type="file" id="Images" class="form-control " name="Images" value="" multiple required>
+                <input type="file" id="Images" class="form-control " name="imgs" value="" multiple required>
                 <p><small class="fw-lighter text-danger text-center fst-italic" id="imgsspan"></small></p>
                 <!-- <output id="output" class="text-light"></output> -->
 
             </div>
             <div id="forInatal">
                 <label for="instalfile" class="form-label">Upload Installation File</b></label><br>
-                <input type="file" id="instalfile" class="form-control" name="instalfile"
+                <input type="file" id="instalfile" class="form-control" name="file"
                     placeholder="Upload The Zip File" value="" required>
                 <p><small class="fw-lighter text-danger text-center fst-italic" id="instspan"></small></p>
 
@@ -140,23 +139,23 @@
 
                 </div>
             </div>
+          
             <div class="mb-5 d-flex flex-column" id="forGenres">
                 <label for="genres" class="form-label">Genres </label>
                 <small id="span" class="fw-lighter text-danger text-center fst-italic"></small>
                 <div class="multi-selector p-0 ">
-                    <div class="select-field input-group bg-light text-center  border solid rounded ">
+                    <div class="select-field input-group bg-light text-center  border solid rounded " onclick="show()">
                         <span class="form-control"> ------select the genres---------</span>
                         <span class="down-arrow text-dark float-end input-group-text ">&blacktriangledown;</span>
                     </div>
-                    <div class="list bg- shadow m-0">
+                    <div class="list bg- shadow m-0" id="list">
                         <div class="d-flex flex-column">
                             <% category.forEach(category=>{ %>
-
                                 <div class="input-group m-2 ">
 
                                     <input type="checkbox" name="genres" id="<%=category.title%>" class="col-2"
                                         value=" <%=category.title%>">
-                                    <label class="col-10" for="<%=category.title%>">
+                                    <label class="col-10 text-light" for="<%=category.title%>">
                                         <%=category.title%>
                                     </label>
                                 </div>
@@ -192,10 +191,19 @@
         crossorigin="anonymous"></script>
     <script>
         // ----------------------selector-----------------
-        document.querySelector('.select-field').addEventListener('click', () => {
-            document.querySelector('.list').classList.toggle('show')
+        function show() {
+        const element = document.getElementById('list')
+        // $('#list').toggle('show')
+            if (element.classList.contains('show')) {
+  element.classList.remove('show');
+} else {
+  element.classList.add('show');
+}
 
-        })
+            // alert("it will show")
+            // document.getElementById('list').classList.toggle('show')
+
+        }
 
 
         //  -----------------------image prereview----------------
@@ -237,11 +245,11 @@
 
     </script>
     <script>
-window.onload = ()=>{
-$(document).ready(function() {
-    $(title).focus();
-});
-}
+// window.onload = ()=>{
+// $(document).ready(function() {
+//     $('#title').focus();
+// });
+// }
         // -----------------form submission --------------
         form.addEventListener('submit', (e) => {
             e.preventDefault()
@@ -257,7 +265,7 @@ $(document).ready(function() {
             function ImageValid() {
                 if (!allowedExtension.exec(filePath)) {
                     console.log('failed')
-                    $('#Image').f.remove(' border-success is-valid').addClass(' border-danger is-invalid');
+                    $('#Image').remove(' border-success is-valid').addClass(' border-danger is-invalid');
                     document.getElementById('imgspan').innerHTML='upload jpg png jpeg'
                     // Image.setCustomValidity('upload jpg png jpeg')
                     return false
@@ -275,7 +283,6 @@ $(document).ready(function() {
                 const instalfilePath = $('#instalfile').val();
                 const instalfileExtension = /(\.zip|\.)$/i;
                 if (!instalfileExtension.exec(instalfilePath)) {
-                    console.log('failed')
                     $('#instalfile').remove(' border-success is-valid').addClass(' border-danger is-invalid');
                     document.getElementById('instspan').innerHTML='upload the zip file'
                     // instalfile.setCustomValidity('upload zip file')

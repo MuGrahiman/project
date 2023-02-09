@@ -48,14 +48,14 @@ router.get('/success',LogVal.userVarify,controler.getSuccess)
 router.get('/cancel',LogVal.userVarify,controler.getCancel)
 
 // -------------sort and filter------------------
-router.post('/pc',LogVal.userVarify,controler.pc)
-router.post('/vr',LogVal.userVarify,controler.vr)
-router.post('/ps',LogVal.userVarify,controler.ps)
-router.post("/less",LogVal.userVarify,controler.less) 
+router.get('/pc',LogVal.userVarify,controler.pc)
+router.get('/vr',LogVal.userVarify,controler.vr)
+router.get('/ps',LogVal.userVarify,controler.ps)
+router.get("/less",LogVal.userVarify,controler.less) 
+router.get("/more",LogVal.userVarify,controler.more) 
+router.get('/subcate/:id',LogVal.userVarify,controler.subcate)
 router.get("/data",LogVal.userVarify,controler.Data) 
-router.post("/more",LogVal.userVarify,controler.more) 
-router.post('/subcate/:id',LogVal.userVarify,controler.subcate)
-
+  
 // --------------------search---------------
 router.get('/search',LogVal.userVarify,controler.search)  
 router.post('/search',LogVal.userVarify,controler.searchpost)  
@@ -63,13 +63,21 @@ router.post('/search',LogVal.userVarify,controler.searchpost)
 router.get('/profile',LogVal.userVarify,controler.profile)
 router.post('/profile',LogVal.userVarify,controler.post_profile)
 router.get('/download',LogVal.userVarify,controler.download)
+// ------------------user name update---------------
+router.patch('/username',LogVal.userVarify,controler.userName)
+
+
  
 
 
-//----------------ADMIN------------------
+//----------------ADMIN------------------ 
 router.get('/admin',LogVal.adminVarify,controler_admin.home)
 router.post('/admin',controler_admin.login_admin)
 router.get('/admin-out',LogVal.AdminOut)
+// ------------------dashboard-----------
+router.get('/dashboard',LogVal.adminVarify,controler_admin.dashboard)
+// ------------------------purchase------------
+router.get('/purchase',LogVal.adminVarify,controler_admin.purchase)
 
 //--------------customer-----------------
 router.get('/admin-customer',LogVal.adminVarify,controler_admin.customer)
@@ -91,12 +99,12 @@ router.get("/category-unblock/:id",LogVal.adminVarify,controler_admin.category_u
 //----------------product-----------------------
 router.get('/admin-product',LogVal.adminVarify,controler_admin.product)
 router.get('/admin-product/:id',LogVal.adminVarify,controler_admin.singleadmin_product)
-router.get('/admin-product-edit/:id',LogVal.adminVarify,controler_admin.Editadmin_product)
 router.get('/admin-product-add',LogVal.adminVarify,controler_admin.product_add)
-router.post('/admin-product-edit/:id',LogVal.adminVarify,controler_admin.update_product)
 router.post('/admin-product-add',LogVal.adminVarify,upload.any(),controler_admin.product_post)
+router.get('/admin-product-edit/:id',LogVal.adminVarify,controler_admin.Editadmin_product)
+router.post('/admin-product-edit/:id',LogVal.adminVarify,upload.any(),controler_admin.update_product)
 router.get("/product-block/:id",LogVal.adminVarify,controler_admin.product_block) 
 router.get("/product-unblock/:id",LogVal.adminVarify,controler_admin.product_unblock) 
 
 
-module.exports=router;  
+module.exports=router;          

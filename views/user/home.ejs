@@ -21,6 +21,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
+  <!-- ------------------ajax----------------- -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <title> PlayTform | <%= title %>
   </title>
 
@@ -28,94 +31,12 @@
 
 <body>
 
-  <header class="">
-    <!-- align-items-center -->
-    <nav class="navbar  navbar-expand-lg p-4 align-text-center">
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="/">
-          <img src="/public/img/log.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top ">
-          <!-- <b >Bootstrap</b> -->
-          <h2 class="text-white ms-4 my-0"><b>PlayTform</b></h2>
-        </a>
-
-        <button class="navbar-toggler navbar-light bg-light" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-
-
-        <div class="offcanvas offcanvas-start bg-dark" style="--bs-bg-opacity: .5;" tabindex="-1"
-          id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
-          <div class="offcanvas-header bg-dark">
-            <!-- <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Offcanvas with backdrop</h5> -->
-            <a class="navbar-brand d-flex align-items-center" href="/">
-              <img src="/public/img/log.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top ">
-              <!-- <b >Bootstrap</b> -->
-              <h2 class="text-white ms-4 my-0"><b>PlayTform</b></h2>
-            </a>
-            <button type="button" class="btn-close  text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-            </button>
-          </div>
-          <div class="offcanvas-body">
-            <div class="navbar-nav ms-auto">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-              <a class="nav-link" href="/product">Store</a>
-              <div class=" navbar-collapse" id="navbarNavDarkDropdown">
-                <ul class="navbar-nav">
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                      Category
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                      <%category.forEach(category=>{ %>
-                        <li><a class="dropdown-item " href="#">
-                            <%= category.title%>
-                          </a></li>
-                        <%})%>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- <a class="nav-link" href="#">Support</a>
-              <i class="nav-link bi bi-cart3 d-none d-lg-block" href="#"></i>
-              <a class="nav-link d-lg-none" href="">Cart</a> -->
-              <i class="nav-link bi bi-search d-none d-lg-block" href="#" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation"></i>
-              <a class="nav-link d-lg-none" href="">Search</a>
-              <a class="nav-link d-none d-lg-block" href="/profile">
-              <i class=" bi bi-person-circle " href="/profile"></i>
-              </a>
-
-              
-              <a class="nav-link d-lg-none" href="/profile">Profile</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </nav>
-
-  </header>
-
-  <!-- -----------------------nav search bar --------------- -->
-  <div class="container mb-5">
-    <div class="collapse " id="navbarSupportedContent">
-      <form class="d-flex border-0" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
+   <%- include('partials/usernav') %>
 
 
 
 
-  <div class="container-fluid ">
+  <div class="container-fluid mt-3">
     <div class="home p-5 border border-1 border-dark">
       <span class="">
         <h2 class=" pt-5">PLATFORM</h2>
@@ -125,6 +46,7 @@
         <h4 class="pb-5">GAMES</h4>
       </span>
       <!-- <a class="home-btn my-5 px-5 py-3" href="/login" role="button">LOGIN</a> -->
+      <% if(!session){%>
       <a class="" style="text-decoration:none " href="/login" role="button">
         <div class="d-grid gap-2 col-4 ">
          
@@ -135,6 +57,7 @@
         </div>
 
       </a>
+      <%}%>
       <!-- <button class="home-btn my-5 px-5 py-3"><a href="">LOGIN</a></button> -->
     </div>
   </div>
@@ -152,12 +75,11 @@
               <div class="col">
 
                 <div class="card m-auto my-5 text-bg-dark">
-                  -->
 
                 <img src="<%=product.img.url%>" 
                 class="card-img" alt="...">
-                  <div class="card-img-overlay">
-                    <h5 class="card-title">
+                  <div class="card-img-overlay d-none">
+                    <h5 class="card-title d-none">
                       <%= product.title%>
                     </h5>
                     <p class="card-text">
@@ -333,7 +255,27 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
+<script>
+        product = document.querySelectorAll('.product_id');
 
+     function category(id) {
+            // alert(id)
+            let arra = [];
+          for (let i = 0; i < product.length; i++) {
+            arra.push(product[i].value);
+          }
+          $.ajax({
+            url: '/subcate/'+id,
+            method: 'GET',
+            data: { id, arr: JSON.stringify(arra) },
+            success: function (response) {
+              if (response.success) {
+                location.href = '/data'
+              }
+            }
+          })
+          }
+</script>
 </body>
 
 </html>

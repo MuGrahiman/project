@@ -2,8 +2,10 @@ const Project = require("../../models/userschema");
 const UserMain = require("../../models/userschema");
 const Product = require("../../models/productschema");
 const Category = require("../../models/categoryschema");
+const Order = require("../../models/orderschema");
 const bcrypt = require("bcrypt");
 const mail_sender = require("../../config/mail_generator");
+const mongoose = require("mongoose");
 const nodemailer = require("nodemailer");
 const { request } = require("express");
 require("dotenv").config();
@@ -18,18 +20,23 @@ const home = (req, res) => {
   Category.find().then((result) => {
     category = result;
   });
- 
-  Product.find()
+
+  Product.find({delete:false})
     .sort({ createdAt: -1 })
     .then((result) => {
       console.log(result);
       console.log("get all Product to home");
       console.log(req.session.usersxn);
-
+      let session = false;
+      if (req.session.usersxn) {
+        session = true;
+      }
+      console.log(session);
       res.render("user/home", {
         title: "Home Page",
         product: result,
         category,
+        session,
       });
     });
   // res.render("user/home", { title: "Home Page" });
@@ -297,7 +304,7 @@ const product = (req, res) => {
   Category.find().then((result) => {
     category = result;
   });
-  Product.find()
+  Product.find({delete:false})
     .sort({ createdAt: -1 })
     .then((result) => {
       console.log("get all Product into product");
@@ -319,18 +326,18 @@ const single_product = async (req, res) => {
     Category.find().then((result) => {
       category = result;
     });
+
     let others = await Product.find();
+    // await Project.find( { product : { $in: [id] } })
+    // let eg  = await Product.find( {_id:id})
+    let eg = await Project.findOne({ email: req.session.usersxn });
+
+    console.log(eg.products.includes(id) + "this is the product ");
+
     Product.findById(id)
       .sort({ createdAt: -1 })
       .then((result) => {
-        console.log(req.session.usersxn);
-        let buyer = false;
-        for (let i = 0; i < result.user.length; i++) {
-          if (result.user[i] == req.session.usersxn) {
-            buyer = true;
-          }
-        }
-
+        let buyer = eg.products.includes(id);
         res.render("user/user-single-product", {
           title: "user-Product",
           product: result,
@@ -345,106 +352,146 @@ const single_product = async (req, res) => {
 };
 // ------------- category-----------------
 const pc = async (req, res) => {
-  console.log(" in the pc code  c" + req.body);
-  const arra = JSON.parse(req.body.arr);
-  console.log(arra);
-  let filtered_product = await Product.find({
-    _id: { $in: arra },
-    category: "pc",
-  });
+  console.log(" in the pc code  c" + req.query.arr);
+
   let category_product = await Product.find({ category: "pc" });
 
-  if (req.session.category == true) {
+  if (!req.query.arr) {
     req.session.product = category_product;
+    console.log('in the ordinary product') 
 
-    res.json({ success: true });
+    res.redirect('/data');
   } else {
-    req.session.product = filtered_product;
-    req.session.category = true;
 
-    res.json({ success: true });
+  const arra = JSON.parse(req.query.arr);
+    let filtered_product = await Product.find({ 
+      _id: { $in: arra },
+      category: "pc", 
+    });
+    console.log(filtered_product.length)
+    if (filtered_product.length<=0) {
+      
+     
+      req.session.product = category_product;
+  console.log('in the ordinary filtered product')
+  
+      res.json({ success: true });
+    } else {
+      req.session.product = filtered_product; 
+      req.session.category = true;
+      console.log('in the filtered product filter ')
+  
+      res.json({ success: true });
+    }
   }
+ 
+  // if (req.session.category == true) {
+  //   req.session.product = category_product;
+
+  //   res.json({ success: true });
+  // } else {
+  //   req.session.product = filtered_product;  
+  //   req.session.category = true;
+
+  //   res.json({ success: true });
+  // }
+  
 };
 const vr = async (req, res) => {
-  console.log(" in the ps code  c" + req.body);
-  const arra = JSON.parse(req.body.arr);
-  console.log(arra);
-
-  let filtered_product = await Product.find({
-    _id: { $in: arra },
-    category: "vr",
-  });
+  console.log(" in the vr code  c" + req.body);
   let category_product = await Product.find({ category: "vr" });
 
-  if (req.session.category == true) {
+  if (!req.query.arr) {
     req.session.product = category_product;
+    console.log('in the ordinary product') 
 
-    res.json({ success: true });
+    res.redirect('/data');
   } else {
-    req.session.product = filtered_product;
-    req.session.category = true;
 
-    res.json({ success: true });
+  const arra = JSON.parse(req.query.arr);
+    let filtered_product = await Product.find({ 
+      _id: { $in: arra },
+      category: "vr", 
+    });
+    console.log(filtered_product.length)
+    if (filtered_product.length<=0) {
+      
+     
+      req.session.product = category_product;
+  console.log('in the ordinary filtered product')
+  
+      res.json({ success: true });
+    } else {
+      req.session.product = filtered_product; 
+      req.session.category = true;
+      console.log('in the filtered product filter ')
+  
+      res.json({ success: true });
+    }
   }
+ 
+  // if (req.session.category == true) {
+  //   req.session.product = category_product;
 
-  // let category;
-  // Category.find().then((result) => {
-  //   category = result;
-  // });
-  // Product.find({ category: "vr" })
-  //   .sort({ createdAt: -1 })
-  //   .then((result) => {
-  //     console.log(result);
-  //     console.log("get all Product into vr");
-  //     res.render("user/user-product", {
-  //       title: "admin-Product",
-  //       product: result,
-  //       category,
-  //     });
-  //   });
+  //   res.json({ success: true });
+  // } else {
+  //   req.session.product = filtered_product;
+  //   req.session.category = true;
+
+  //   res.json({ success: true });
+  // }
+
+
 };
 const ps = async (req, res) => {
   console.log(" in the ps code  c" + req.body);
-  const arra = JSON.parse(req.body.arr);
-  console.log(arra);
-
-  let filtered_product = await Product.find({
-    _id: { $in: arra },
-    category: "ps",
-  });
   let category_product = await Product.find({ category: "ps" });
 
-  if (req.session.category == true) {
+  if (!req.query.arr) {
     req.session.product = category_product;
+    console.log('in the ordinary product') 
 
-    res.json({ success: true });
+    res.redirect('/data');
   } else {
-    req.session.product = filtered_product;
-    req.session.category = true;
 
-    res.json({ success: true });
+  const arra = JSON.parse(req.query.arr);
+    let filtered_product = await Product.find({ 
+      _id: { $in: arra },
+      category: "ps", 
+    });
+    console.log(filtered_product.length)
+    if (filtered_product.length<=0) {
+      
+     
+      req.session.product = category_product;
+  console.log('in the ordinary filtered product')
+  
+      res.json({ success: true });
+    } else {
+      req.session.product = filtered_product; 
+      req.session.category = true;
+      console.log('in the filtered product filter ')
+  
+      res.json({ success: true });
+    }
   }
+  // if (req.session.category == true) {
+  //   req.session.product = category_product;
 
-  // let category;
-  // Category.find().then((result) => {
-  //   category = result;
-  // });
-  // Product.find({ category: "ps" })
-  //   .sort({ createdAt: -1 })
-  //   .then((result) => {
-  //     console.log(result);
-  //     console.log("get all Product into ps");
-  //     res.render("user/user-product", {
-  //       title: "user-Product",
-  //       product: result,
-  //       category,
-  //     });
-  //   });
+  //   res.json({ success: true });
+  // } else {
+  //   req.session.product = filtered_product;
+  //   req.session.category = true;
+
+  //   res.json({ success: true });
+  // }
+
+
 };
 // ---------------sort---------
 const more = async (req, res) => {
   console.log(" in the more code  c" + req.body);
-  const arra = JSON.parse(req.body.arr);
+  const arra = JSON.parse(req.query.arr);
   console.log(arra);
 
   await Product.find({ _id: { $in: arra } })
@@ -459,7 +506,7 @@ const more = async (req, res) => {
 };
 const less = async (req, res) => {
   console.log(" in the less code  c" + req.body);
-  const arra = JSON.parse(req.body.arr);
+  const arra = JSON.parse(req.query.arr);
   console.log(arra);
 
   await Product.find({ _id: { $in: arra } })
@@ -472,80 +519,50 @@ const less = async (req, res) => {
     })
     .catch((err) => console.log(err));
 
-  //    let product =
-  // await Product.find({ _id: { $in: arra } });
-  // const { promisify } = require("util");
-  // const sortAsync = promisify(product.sort.bind(product));
-
-  // sortAsync({ cost: 1 })
-  //   .then(result => {
-  //     console.log(result);
-  //     res.render("user/user-product", {
-  //       title: "user-Product",
-  //       product: result,
-  //       category
-  //     });
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   });
-
-  // product.sort({ cost: 1 }, function(error, result) {
-  //   if (error) {
-  //     console.error(error);
-  //   } else {
-  //     console.log(result);
-  //     res.render("user/user-product", {
-  //       title: "user-Product",
-  //       product: result,
-  //       category
-  //     });
-  //   }
-  // });
-
-  // console.log(products);
-
-  // let product = []
-  // for (let i = 0; i < arra.length; i++) {
-  //  await Product.find({_id:arra[i]})
-  //   .then((res)=>{
-  //     product.push(res)
-  //   })
-
-  // }
-  // const collection = Product.find({ id: { $in: arra } }).sort({ cost: -1 });
-  // console.log(collection);
-  // Product.find({ product_id: { $in: arra } })
-  // .sort({ cost: -1 })
-  // .exec((err, products) => {
-  //   if (err) {
-  //     return res.send(err);
-  //   }
-  //   return res.json(products);
-  // });
 };
 //-----------------sub category----------------
 const subcate = async (req, res) => {
   try {
     console.log(" in the subcategory code  c" + req.params.id);
-    const arra = JSON.parse(req.body.arr);
+  // let category_product = await Product.find({ category: "ps" });
+  // const arra = JSON.parse(req.query.arr);
     const id = req.params.id;
     let genres = await Category.findById(id);
-    let category_product = await Product.find({ genres: genres.title });
+    let category_product =
+    await Product.find({ genres:genres.title })
+    .then((result)=>console.log(result))
+  console.log(genres.title);
+  // console.log(category_product);
+
+    if (!req.query.arr) {
+      req.session.product = category_product;
+      console.log('in the ordinary product') 
+  
+      res.redirect('/data');
+    } else {
+  
+    const arra = JSON.parse(req.query.arr);
     let filtered_product = await Product.find({
       _id: { $in: arra },
       genres: genres.title,
     });
-    // if (req.session.genres == true) {
-    // req.session.product = category_product;
-    // req.session.genres = false;
-    res.json({ success: true });
-    // } else {
-    req.session.product = filtered_product;
-    req.session.genres = true;
-
-    res.json({ success: true });
-    // }
+      // console.log(filtered_product.length)
+      if (filtered_product.length<=0) {
+        
+       
+        req.session.product = category_product;
+        // console.log(req.session.product);
+    console.log('in the ordinary filtered product')
+    
+        res.json({ success: true });
+      } else {
+        req.session.product = filtered_product; 
+        req.session.category = true;
+        console.log('in the filtered product filter ')
+    
+        res.json({ success: true });
+      }
+    }
   } catch (error) {
     console.log(error);
   }
@@ -598,9 +615,9 @@ const searchpost = async (req, res) => {
   });
   Product.find({
     $or: [
-      { title: { $regex: req.body.search } },
-      { category: { $regex: req.body.search } },
-      { genres: { $regex: req.body.search } },
+      { title:  { $regex: new RegExp(req.body.search, "i") } },
+      { category:  { $regex: new RegExp(req.body.search, "i") } },
+      { genres:  { $regex: new RegExp(req.body.search, "i") } },
     ],
   })
     .sort({ createdAt: -1 })
@@ -631,7 +648,7 @@ const coupen_check = async (req, res) => {
       let dateEx = "Coupon Expired ";
       res.json({ dateEx });
     } else {
-      const float = false;
+      let float = false;
       // coup.user.forEach((element) => {
       for (let i = 0; i < coup.user.length; i++) {
         const element = coup.user[i];
@@ -651,9 +668,9 @@ const coupen_check = async (req, res) => {
           { code: value },
           { $push: { user: req.session.usersxn } }
         ).then((res) => console.log(res));
-        // coup.update({ $push: { user: req.session.usersxn } });
-        const userSxn = coup.discount;
-        res.json({ userSxn });
+        req.session.coupen = coup.id;
+        const userSxs = coup.discount;
+        res.json({ userSxs });
       }
     }
   } else {
@@ -661,6 +678,7 @@ const coupen_check = async (req, res) => {
     console.log(NotFound);
     res.json({ NotFound });
   }
+  
 };
 // -------------------------------pay pal-------------
 const pay = (req, res) => {
@@ -708,6 +726,7 @@ const pay = (req, res) => {
     } else {
       for (let i = 0; i < payment.links.length; i++) {
         if (payment.links[i].rel === "approval_url") {
+          console.log(payment.links[i].rel + "approval_url");
           res.redirect(payment.links[i].href);
         }
       }
@@ -743,20 +762,28 @@ const getSuccess = async (req, res) => {
         return false;
       } else {
         let category;
-        let id = req.session.payedproduct;
+        let id = mongoose.Types.ObjectId(req.session.payedproduct);
+        console.log(id);
 
-        Product.findByIdAndUpdate(
-          { _id: id },
-          { $push: { user: req.session.usersxn } }
+        Project.findOneAndUpdate(
+          { email: req.session.usersxn },
+          { $push: { products: req.session.payedproduct } }
         )
           .then((result) => {
-            Project.findByIdAndUpdate(
-              { email: req.session.usersxn },
-              { $push: { product: req.session.payedproduct } }
-            ).then((result) => {
-              res.redirect("/product/" + id);
+            console.log(result.id);
+            let order = new Order({
+              user: result.id,
+              product :req.session.payedproduct,
+              coupen:req.session.coupen,
+              finalAmount:cost
             });
+            order.save().then((result)=>{
+              console.log(res)
+            res.redirect("/product/" + id);
+
+            })
           })
+
           .catch((err) => console.log(err));
       }
     }
@@ -798,7 +825,7 @@ const Data = async (req, res) => {
       console.log("get all Product into data");
 
       if (req.session.product) {
-        console.log(req.session.product);
+        // console.log(req.session.product);
 
         let product = req.session.product;
         req.session.product = false;
@@ -828,7 +855,7 @@ const profile = async (req, res) => {
   });
 };
 const post_profile = async (req, res) => {
-  const username = req.body.username;
+  // const username = req.body.username;
   const currentpass = req.body.currentpass;
   const newpass = req.body.newpass;
   console.log(newpass, currentpass);
@@ -845,43 +872,69 @@ const post_profile = async (req, res) => {
       await UserMain.findOneAndUpdate(
         { email: req.session.usersxn },
         {
-          name: username,
           password: newpassword,
         }
       );
       res.json({ finish: "Your Password Is Not Matching" });
     }
-
   } else {
     res.json({ pass: "Your Password Is Not Matching" });
   }
 };
 const download = async (req, res) => {
-  let category;
-  let ids;
-  Project.find({ email: req.session.usersxn }).then(
-    (result) => (ids = result.product)
-  );
-  // const ids = [id1, id2, id3];
-  const data = await Product.find({
-    _id: {
-      $in: ids,
-    },
-  });
+  // let ids;
+  // Project.find({ email: req.session.usersxn }).then(
+  //   (result) => (ids = result.product)
+  // );
+  await Project.findOne({ email: req.session.usersxn })
+    .populate("products")
+    .exec()
+    .then((user) => {
+      console.log(user.products + "user poopulaataer");
+      if (user) {
+        let product = user.products;
+        console.log(product);
 
-  Category.find().then((result) => {
-    res.render("user/downloads", {
-      title: "profile Page",
-      category: result,
-      data,
+        res.render("user/downloads", {
+          title: "profile Page",
+          data: product,
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  });
-};
+  // const data = await Product.find({
+  //   _id: {
+  //     $in: ids,
+  //   },
+  // });
 
+  // Category.find().then((result) => {
+
+  // });
+};
+const userName = (req,res)=>{
+  console.log('in the patch route'+req.body.username)
+  Project.findOneAndUpdate({
+    email: req.session.usersxn
+  }, {
+    $set: {
+      name: req.body.username 
+    }
+  }).then((result) => {
+    console.log(result)
+    res.json({
+      success: "success"
+    })
+  }).catch((error)=>{
+    console.log(error)
+    res.json({failed:"failed"})
+  })
+}
 //-------------export-items-------------
 
 module.exports = {
-  download,
   Data,
   home,
   login,
@@ -912,5 +965,7 @@ module.exports = {
   getCancel,
   getSuccess,
   profile,
+  download,
   post_profile,
+  userName
 };

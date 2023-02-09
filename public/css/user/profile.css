@@ -30,11 +30,11 @@ nav h2 {
 
 }
 
-.nav-link {
+/* .nav-link {
     color: #fff !important;
     font-size: x-large !important;
     font-family: 'Zen Dots', cursive !important;
-}
+} */
 
 
 .home-btn {
@@ -54,7 +54,7 @@ nav h2 {
 }
 
 .form-container {
-    height: 100vh;
+    min-height: 100vh;
     /* justify-content: center;
     align-items: center; */
     /* width: 35rem; */

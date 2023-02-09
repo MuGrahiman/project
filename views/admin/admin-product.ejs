@@ -21,14 +21,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
-  <title>PlayTform | <%= title %></title>
+  <title>PlayTform | <%= title %>
+  </title>
 
 </head>
 
 <body>
   <%- include('partials/navadmin') %>
- 
-  <!-- <header class="">
+
+    <!-- <header class="">
 
 
       <nav class="navbar navbar-expand-lg px-5 align-text-center">
@@ -66,18 +67,18 @@
       <div class="card">
         <div class="card-header d-flex">
           <div class="col-10">
-          <h1>Manage your Product</h1>
+            <h1>Manage your Product</h1>
 
           </div>
           <div class="col-2 text-center d-grid">
-            <a class="btn btn-sm btn-outline-secondary my-auto" type="button" href="/admin-product-add" >Add</a>
+            <a class="btn btn-sm btn-outline-secondary my-auto" type="button" href="/admin-product-add">Add</a>
           </div>
         </div>
         <div class="card-body">
-          <div class="row card-title ">
+          <div class="row card-title justify-content-between">
             <div class="col-md-2 col-3  "><b> Image</b></div>
             <div class="col-md-2 col-3 "><b> Name</b></div>
-            <div class="col-md-2 col-3  d-none d-md-block"><b> Customers</b></div>
+            <!-- <div class="col-md-2 col-3  d-none d-md-block"><b> Customers</b></div> -->
             <div class="col-md-2 col-3  d-none d-md-block"><b> Cost</b></div>
             <div class="col-md-2 col-3 "><b> Details</b></div>
             <div class="col-md-2 col-3 "><b> Status</b></div>
@@ -86,7 +87,7 @@
           </div>
           <%product.forEach(product=>{ %>
 
-            <div class="row  justify-content-center align-items-center">
+            <div class="row  justify-content-between align-items-center">
               <div class="col-md-2 col-3 py-2 align-items-center">
                 <div class="shadow-lg ">
                   <img src="<%=product.img.url%>" class="img-fluid rounded shadow-lg" alt="">
@@ -95,29 +96,29 @@
               <div class="col-md-2 col-3 ">
                 <%= product.title%>
               </div>
-              <div class="col-md-2 col-3  d-none d-md-block text-center">Customer</div>
+              <!-- <div class="col-md-2 col-3  d-none d-md-block text-center">Customer</div>   -->
 
               <div class="col-md-2 col-3  d-none d-md-block">
                 <%= product.cost %>
               </div>
               <div class="col-md-2 col-3 p-1">
 
-           <div class="d-grid col-3 ">
-            <a href="/admin-product/<%=product._id %>"  type="button"
-              class="btn btn-sm btn-outline-primary text-decoration-none ">Details</a>
-           </div>
+                <div class="d-grid col-3 ">
+                  <a href="/admin-product/<%=product._id %>" type="button"
+                    class="btn btn-sm btn-outline-primary text-decoration-none ">Details</a>
+                </div>
 
               </div>
               <div class="col-md-2 col-3 p-1">
-              <div class="d-grid col-3  p-0">
-                <% if(product.delete==false){%>
-                  <a href="/product-block/<%=product._id %>" type="button"
-                    class="btn btn-sm btn-outline-danger text-decoration-none ">Block</a>
-                <%}else{%>
-                  <a href="/product-unblock/<%=product._id %>" type="button"
+                <div class="d-grid col-3  p-0">
+                  <% if(product.delete==false){%>
+                    <a href="/product-block/<%=product._id %>" type="button"
+                      class="btn btn-sm btn-outline-danger text-decoration-none ">Block</a>
+                    <%}else{%>
+                      <a href="/product-unblock/<%=product._id %>" type="button"
                         class="btn btn-sm btn-outline-success text-decoration-none ">UnBlock</a>
-                  <%}%>
-              </div>
+                      <%}%>
+                </div>
               </div>
             </div>
             <%})%>

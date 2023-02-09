@@ -2,7 +2,11 @@ let mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 let schema = mongoose.Schema;
 let userschema = new schema(
-  {product: [],
+  {
+    products: [{
+       type: mongoose.Types.ObjectId,
+        ref: "products"
+       }],
     name: {
       type: String,
       required: true,
@@ -15,13 +19,13 @@ let userschema = new schema(
       type: String,
       required: true,
     },
-  delete: {
-    type:Boolean,
-    defualt:false
+    delete: {
+      type: Boolean,
+      defualt: false,
+    },
   },
-  }, { timestamps: true }
+  { timestamps: true }
 );
-
 
 let Project = mongoose.model("projects", userschema);
 

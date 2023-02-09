@@ -7,8 +7,27 @@ body {
     min-height: 100vh;
     box-sizing: border-box;
     margin: 0px;
+    width: 100%;
     font-size: 0rem;
 }
+.box-shadow {
+    box-shadow:15px 15px 10px rgb(6 6 6);
+}
+.hd {
+    font-family: 'Zen Dots', cursive !important;
+
+}
+.p{
+    font-family: 'Odibee Sans', cursive;
+
+}
+.overflow{
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type:mandatory;
+}
+/* ----------nav-bar--------- */
+
 
 nav {
     display: flex !important;
@@ -19,108 +38,31 @@ nav h2 {
     font-family: 'Odibee Sans', cursive;
     color: #fff;
 }
-
-#nav-icon {
-    background: rgb(255, 255, 255);
-    /* background-color : black !important; */
-}
-
-#icon {
-    background-color: rgb(236, 236, 236);
-
-}
-
 .nav-link {
     color: #fff !important;
     font-size: x-large !important;
     font-family: 'Zen Dots', cursive !important;
 }
-/* 
-.home {
-    background-image: url(/public/img/home-img.jpg);
-    background-repeat: no-repeat;
-    background-size: cover; */
-    /* opacity: .25; */
-    /* color: #fff; */
-
-    /* font-size: x-large ; */
-    /* font-family: 'Zen Dots', cursive;
-} */
-
-/* .home-btn {
-    color: #fff !important;
-    font-size: x-large !important;
-    font-family: 'Zen Dots', cursive !important;
-    background-color: transparent;
-    border: 5px solid rgb(255, 255, 255);
-    border-radius: 1em;
-} */
-/* 
-.home-btn:hover {
-    color: blue !important;
-    cursor: pointer;
-    border: 5px solid rgb(17, 36, 238);
-    border-radius: 1em;
-} */
-
-
-
-/* login-signin  css */
-/* .container {
-    justify-content: center;
-} */
-
-/* .form-container {
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    width: 35rem; */
-    /* font-size: large; */
-/* } */
-
-/* form{
-
-    border: 1px solid #fff;
-    border-radius: 10px;
-    align-items: center;
-    width: inherit;
+.head{
+align-items: center;
+font-family: 'Zen Dots', cursive;
+}
+/* .body-3{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
 
 } */
-
-/* .form-container input { */
+/* ----------admin detail--------- */
+/* .container{ */
     /* justify-content: center; */
-    /* padding: 5px 0px 5px !important;
-    width: 100%;
-    margin: 5px 0 !important;
-    border: 3px solid #fff !important;
-    border-radius: 10px;
-    box-sizing: border-box;
-    cursor: pointer !important;
-
+       /* align-items: center; */
+    /* height: 100vh; */
+/* } */
+/* .form-container{
+    justify-content: center;
+    height: inherit;
 } */
-
-.btn-sub {
-    background-color: transparent;
-    padding: 1rem 5rem;
-    border-radius: 10px;
-    text-align: center;
-    border: 3px solid #fff !important;
-}
-
-.btn-sub:hover {
-    background-color: blue !important;
-    border: 3px solid blue !important;
-}
-
-/*----------otp-box-----------*/
-.popup_box {
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    background-color: rgba(70, 10, 92) !important;      
-    box-shadow: 0px 5px 10px rgb(4, 4, 4);
-
-}
 form{
 
     border: 1px solid #fff;
@@ -130,7 +72,23 @@ form{
     font-family: 'Odibee Sans', cursive;
     font-weight: lighter;
     font-size: x-large;
+    padding: 30px;
 }
+@media all and (max-width:768px) {
+    
+
+    form {
+        border: 0px solid #fff;
+        border-radius: 10px;
+        align-items: center;
+        width: inherit;
+        font-family: 'Odibee Sans', cursive;
+        font-weight: 100;
+        font-size: larger;
+        padding: 10px;
+
+    }
+ }
 
  input {
     /* justify-content: center; */
@@ -158,4 +116,57 @@ form{
 .btn-sub:hover {
     background-color: blue !important;
     border: 3px solid blue !important;
+}
+output{
+    width: 100%;
+    height: fit-content;
+    display: inline-flex!important;
+    justify-content: flex-start;
+    flex-shrink: 3;
+    gap: 15px;
+    position: relative;
+    border-radius: 5px;
+  }
+
+  output .image{
+   height: 150px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+    /* width: 10px; */
+  }
+
+  output .image img{
+    height: 100%;
+    width: 100%;
+  }
+  
+  output .image span {
+    position: absolute;
+    top: -4px;
+    right: 4px;
+    cursor: pointer;
+    font-size: 22px;
+    color: white;
+  }
+  
+  output .image span:hover {
+    opacity: 0.8;
+  }
+  
+  output .span--hidden{
+    visibility: hidden;
+  }
+  .list {
+    display: none ;
+    /* position: absolute;
+    z-index:    1; */
+    width: 100%;
+    /* display: flex;
+    display: list-item; */
+ }
+.show {
+display: block;
+color: #6c0790;
 }

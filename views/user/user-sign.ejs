@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap" rel="stylesheet">
     <!-- java script -->
-    <script src="/public/extra.js" type="text/javascript"></script>
+    <!-- <script src="/public/extra.js" type="text/javascript"></script> -->
 
     <title>PlayTform | <%= title %>
     </title>
@@ -30,42 +30,10 @@
 </head>
 
 <body>
-    <!-- <header>
-        <nav class="navbar navbar-expand-lg px-5 align-text-center">
-            <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" href="/">
-                    <img src="/public/img/log.png" alt="Logo" width="40" height="40"
-                        class="d-inline-block align-text-top ">
-                    <h2 class="text-white ms-4 my-0"><b>PlayTform</b></h2>
-                </a>
-
-                <button class="navbar-toggler navbar-light bg-light" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                        <a class="nav-link" href="#">Store</a>
-                        <a class="nav-link" href="#">About</a>
-                        <a class="nav-link" href="#">Support</a>
-                        <i class="nav-link bi bi-cart3 d-none d-lg-block" href="#"></i>
-                        <a class="nav-link d-lg-none" href="">Cart</a>
-                        <i class="nav-link bi bi-search d-none d-lg-block" href="#"></i>
-                        <a class="nav-link d-lg-none" href="">Search</a>
-                        <i class="nav-link bi bi-person-circle d-none d-lg-block" href="#"></i>
-                        <a class="nav-link d-lg-none" href="">Profile</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-    </header> -->
+   
     <div class="container my-5 text-light d-flex">
 
-        <form class="col-6 p-5 m-auto shadow " action="/sign-up" method="post">
+        <form class="col-md-6 p-5 m-auto shadow " action="/sign-up" method="post">
             <div id="emailHelp" class="form-text text-light m-auto mb-3">
                 <h1>sign-up</h1>
             </div>
@@ -212,7 +180,7 @@
         }
         document.getElementById("btnres").addEventListener("click", () => {
             localStorage.setItem("timeRemaining", 60);
-            window.location = 'http://localhost:3010/sign-up';
+            window.location = 'http://localhost:3040/sign-up';
 
         });
 
