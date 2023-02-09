@@ -15,7 +15,7 @@ const Coupen = require("../../models/coupen");
 const PAYPAL = require("../../config/mail_generator");
 const paypal = require("paypal-rest-sdk");
 
-const home = (req, res) => {
+const   home = (req, res) => {
   let category;
   Category.find().then((result) => {
     category = result;
