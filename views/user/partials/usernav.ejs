@@ -103,6 +103,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark">
                       <%if (category){ %>
+                        <script>alert('<%=category %>')</script>
                       <%category.forEach(category=>{ %>
                         <li><a class="dropdown-item "  onclick="category('<%=category._id %>')">
                             <%= category.title%>
