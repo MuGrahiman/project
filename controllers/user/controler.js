@@ -694,8 +694,8 @@ const pay = (req, res) => {
     redirect_urls: {
       // return_url: `${process.env.PAYPALink}/success`,
       // cancel_url:`${process.env.PAYPALink}/cancel`,
-      return_url: `http://localhost:${process.env.PORT}/success`,
-      cancel_url: `http://localhost:${process.env.PORT}/cancel`,
+      return_url: `http://playtform.online/success`,
+      cancel_url: `http://playtform.online/cancel`,
     },
     transactions: [
       {
