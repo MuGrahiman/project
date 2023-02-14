@@ -60,7 +60,7 @@ const post_login = async (req, res) => {
 
     if (user) {
       if (password) {
-        if (user.delete === true) {
+        if (user.delete == true) {
           res.render("user/user-login", {
             title: "Login Page",
             error: "you are blocked.Please contact admin",
@@ -541,10 +541,15 @@ const coupen_check = async (req, res) => {
           let UserEx = "you already used this coupen";
           res.json({ UserEx });
         } else {
-       
+          Coupen.findOneAndUpdate(
+            { _id: coup.id },
+            { $push: { user: req.session.usersxn } }
+          ).then((result)=>{
+         
           req.session.coupen = coup.id;
           const userSxs = coup.discount;
           res.json({ userSxs });
+        })
         }
       }
     } else {
@@ -637,12 +642,7 @@ const getSuccess = async (req, res) => {
         } else {
           let category;
           let id = mongoose.Types.ObjectId(req.session.payedproduct);
-          Coupen.findOneAndUpdate(
-            { _id: req.session.coupen },
-            { $push: { user: req.session.usersxn } }
-          ).then((result)=>{
-            console.log(result)
-          })
+        
           Project.findOneAndUpdate(
             { email: req.session.usersxn },
             { $push: { products: req.session.payedproduct } }

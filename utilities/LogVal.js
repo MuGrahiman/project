@@ -1,15 +1,27 @@
-const user = require('../models/userschema');
+const UserMain = require('../models/userschema');
 require("dotenv").config(), require("../config/connection");
 const Path = require("path");
 const { request } = require("express");
 require("dotenv").config();
 console.log('In The logvalidation')
-const userVarify = (req,res,next)=>{
+const userVarify = async(req,res,next)=>{
     try {
         if (req.session.usersxn) {
-            next()
+            let user ;
+             UserMain.find({ email: req.session.usersxn })
+            .then((result)=>{
+                if (result.delete == true) {
+                    res.render("user/user-login", {
+                      title: "Login Page",
+                      error: "you are blocked.Please contact admin",
+                    });
+                  } else {
+                next()
+                  }
+            })
+            
+
         }else{
-            // res.render("user/user-login", { title: "Login Page", category: category });
 res.redirect('/login')
         }
     } catch (error) {
