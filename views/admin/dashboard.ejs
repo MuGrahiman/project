@@ -74,7 +74,7 @@
           <div class="card bg-warning text-white mb-4">
                 <div class="card-body" style="height:100px;"><h3>Revenue</h3></div>
               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <h5><%= order[0].amount %>  </h5>
+                  <h5><%= order[0]?.amount %>  </h5>
                   <div class="small text-white"></div>
               </div>
           </div>
@@ -145,7 +145,7 @@
       datasets: [{
         label: 'Revenue',
         backgroundColor: ['#007bff', '#E4E40F','#16A9A5' , '#4FFF33' , '#F10707',],
-        data: ["<%= product.length%> ", "<%= user.length%>", "<%= order.length%> ",  "<%= order[0].amount %>" ],
+        data: ["<%= product.length%> ", "<%= user.length%>", "<%= order.length%> ",  "<%= order[0]?.amount %>" ],
 
       }]
     }
@@ -165,7 +165,7 @@ datasets: [{
   label: "Revenue",
   backgroundColor: "rgba(2,117,216,1)",
   borderColor: "rgba(2,117,216,1)",
-  data: ["<%= product.length%> ", "<%= user.length%>", "<%= order.length%> ",  "<%= order[0].amount %>" ],
+  data: ["<%= product.length%> ", "<%= user.length%>", "<%= order.length%> ",  "<%= order[0]?.amount %>" ],
 }],
 },
 options: {
