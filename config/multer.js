@@ -7,8 +7,7 @@ const sharp = require('sharp')
 
 const storage = multer.diskStorage({
     destination:(req,file,cb)=>{
-      console.log('in the multer')
-      console.log(file)
+   
       if (file.fieldname == 'file') {
         cb(null, path.join(__dirname,'../public/upload/files'));
 
@@ -17,7 +16,7 @@ const storage = multer.diskStorage({
 
       } else if (file.fieldname == 'img') {
         cb(null, path.join(__dirname,'../public/upload/Image'));
-
+ 
       }
       
     },
@@ -26,25 +25,16 @@ const storage = multer.diskStorage({
         cb(null, file.originalname + '-' + uniqueSuffix)
     }
 })
-// const multerFilter = (req, file, cb) => {
-// let result ;
-//  sharp(file)
-//  .resize({ width: 485, height: 485 })
-//  .then(res=>result=res)
-//  cb(null,result)
-// }
+
 const multerFilter = async(req, file, cb) => {
 
   let filter = sharp(file).resize({ width: 485, height: 485 })
-    // .then(res => cb(null, res))
     cb(null,filter)
 }
 const upload=multer({storage,
   fileFilter:multerFilter
 })
 
-
-// 
   const cloudstorage = new CloudinaryStorage({
       cloudinary: cloudinary,
       params: {
@@ -52,6 +42,4 @@ const upload=multer({storage,
         resource_type:"auto"
       },
     });
-    // const upload = multer({ storage: cloudstorage});
-console.log(upload)
   module.exports=upload

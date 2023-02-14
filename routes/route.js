@@ -15,7 +15,6 @@ router.get('/',controler.home)
   //  -----------login------------------
 router.get('/login',controler.login)
 router.post('/login',controler.post_login)
-// router.get('/admin-out',LogVal.AdminOut)
 router.get('/user-out',LogVal.userOut)
 
   //  -----------forgot------------------  
@@ -27,8 +26,6 @@ router.post("/forgot-otp",controler.forgot_otpost)
 router.get("/forgot-password",controler.forgot_password)
 router.post("/forgot-password",controler.forgotpost_password)
 router.get('/foresend',controler.foresend)
-
-
 
   //----------signup----------------
 router.get('/sign-up',controler.signUp)
@@ -65,9 +62,10 @@ router.post('/profile',LogVal.userVarify,controler.post_profile)
 router.get('/download',LogVal.userVarify,controler.download)
 // ------------------user name update---------------
 router.patch('/username',LogVal.userVarify,controler.userName)
-
-
- 
+// --------------------------404-----------------
+router.get('/404',controler.erro_404)
+// --------------------------500-------------------
+router.get('/500',controler.erro_500)
 
 
 //----------------ADMIN------------------ 

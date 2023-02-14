@@ -7,11 +7,8 @@ const OTPadmin = "mujeebrahiman2000@gmail.com";
 const OTpassword = "rpfyfduxxqolmtvl";
 
 async function mail_sending(body) {
-  console.log(body.email, "this is the user mail");
-  //  req.session.otp = OTP;
    OTP = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000; 
 
-  
          console.log(OTP);
   // ----------mail transporter----------------
 
@@ -31,18 +28,14 @@ async function mail_sending(body) {
     subject: "OTP Varification",
     html: `<p>this is your OTP ${OTP}</p>`,
   };
-  // console.log(OTP);
   // ----------------sending mail -----------------
   let b;
   const a = await transporter.sendMail(
     mailOptions,
     (b = (err, data) => {
       if (err) {
-        console.log("mail Varified Error " + err);
         return false;
       } else {
-        console.log("mail send successfully");
-        // req.session.otp = OTP;
         return true;
       }
     })
