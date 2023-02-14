@@ -89,7 +89,7 @@ const customer_block = (req, res) => {
   Project.findByIdAndUpdate({ _id: req.params.id }, { $set: { delete: true } })
     .then((result) => {
       res.redirect("/admin-customer");
-      console.log("this is the result" + result);
+    
     })
     .catch((err) => {console.log("404", { title: "Blog not found" })});
 };

@@ -8,8 +8,9 @@ const userVarify = async(req,res,next)=>{
     try {
         if (req.session.usersxn) {
             let user ;
-             UserMain.find({ email: req.session.usersxn })
+             UserMain.findOne({ email: req.session.usersxn })
             .then((result)=>{
+                console.log(result.delete)
                 if (result.delete == true) {
                     res.render("user/user-login", {
                       title: "Login Page",
